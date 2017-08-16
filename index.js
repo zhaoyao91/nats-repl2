@@ -23,13 +23,19 @@ context.logger = logger
 const {AUTO_LOG} = process.env
 
 if (AUTO_LOG) {
+  let callCount = 0
+
   const originalCall = method.call.bind(method)
-  method.call = function (...args) {
-    return originalCall(...args)
+  method.call = function (name, input) {
+    const id = ++callCount
+    setTimeout(() => logger.info({msg: 'method called', id}), 0)
+    return originalCall(name, input)
       .then(res => {
-        logger.info(res)
+        logger.info({msg: 'method returned', id, result: res})
         return res
       })
-      .catch(err => logger.error(err))
+      .catch(err => {
+        logger.error({msg: 'method failed', id, error: err})
+      })
   }
 }
