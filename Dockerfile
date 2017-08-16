@@ -8,4 +8,4 @@ COPY . /app
 
 RUN npm install
 
-CMD node .
+CMD node --harmony .
