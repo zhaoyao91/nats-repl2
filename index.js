@@ -1,6 +1,6 @@
 require('checkenv').check()
 
-const logger = require('env-pino')
+const logger = require('simple-json-logger')
 const repl = require('repl')
 const connectMethod = require('nats-method')
 const connectEvent = require('nats-event')
@@ -31,7 +31,7 @@ if (AUTO_LOG) {
         return res
       })
       .catch(err => {
-        logger.info('method failed', {id, error: err})
+        logger.error(err, 'method failed', {id})
       })
   }
 }

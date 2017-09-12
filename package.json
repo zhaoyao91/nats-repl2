@@ -6,8 +6,8 @@
   "license": "MIT",
   "dependencies": {
     "checkenv": "^1.2.2",
-    "env-pino": "^1.0.1",
-    "nats-event": "^1.2.0",
-    "nats-method": "^1.2.0"
+    "nats-event": "^1.3.2",
+    "nats-method": "^1.3.1",
+    "simple-json-logger": "^1.1.0"
   }
 }
