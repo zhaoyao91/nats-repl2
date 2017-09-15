@@ -2,7 +2,7 @@
 
 Docker image to launch a node repl container to help debug nats.
 
-Using **[nats-method][nats-method]** and **[nats-event][nats-event]** as helpers.
+Using [nats-method][nats-method], [nats-method-ex][nats-method-ex] and [nats-event][nats-event] as helpers.
 
 ## Usage
 
@@ -23,13 +23,17 @@ docker run --rm -it \
   zhaoyao91/nats-repl2
 ```
 
-Then you will be in a node repl with `method` and `event` variables initialized.
+Then you will be in a node repl with `method`, `methodEx` and `event` variables initialized.
 
-See [nats-method][nats-method] and [nats-event][nats-event] for api.
+See 
+- [nats-method][nats-method]
+- [nats-method-ex][nats-method-ex]
+- [nats-event][nats-event]
 
 ## License
 
 MIT
 
 [nats-method]: https://github.com/zhaoyao91/nats-method
+[nats-method-ex]: https://github.com/zhaoyao91/nats-method-ex
 [nats-event]: https://github.com/zhaoyao91/nats-event
