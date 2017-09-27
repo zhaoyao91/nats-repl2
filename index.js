@@ -5,6 +5,7 @@ const repl = require('repl')
 const connectMethod = require('nats-method')
 const connectEvent = require('nats-event')
 const connectMethodEx = require('nats-method-ex')
+const uuid = require('uuid').v4
 
 const {NATS_URL, METHOD_NATS_URL, EVENT_NATS_URL} = process.env
 
@@ -43,7 +44,7 @@ if (AUTO_LOG) {
   {
     const originalCall = methodEx.call.bind(methodEx)
     methodEx.call = function (name, data, options = {}) {
-      const requestId = options.requestId || Math.ceil(Math.random() * 1000000)
+      const requestId = options.requestId || uuid()
       setTimeout(() => logger.info('method called', {requestId}), 0)
       return originalCall(name, data, {requestId, ...options})
         .then(res => {
