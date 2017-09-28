@@ -5,24 +5,23 @@ const repl = require('repl')
 const connectMethod = require('nats-method')
 const connectEvent = require('nats-event')
 const connectMethodEx = require('nats-method-ex')
+const connectEventEx = require('nats-event-ex')
 const uuid = require('uuid').v4
 
 const {NATS_URL, METHOD_NATS_URL, EVENT_NATS_URL} = process.env
 
-const method = NATS_URL ? connectMethod(NATS_URL) : connectMethod(METHOD_NATS_URL)
-const event = NATS_URL ? connectEvent(NATS_URL) : connectEvent(EVENT_NATS_URL)
-const methodEx = NATS_URL ? connectMethodEx(NATS_URL) : connectMethodEx(METHOD_NATS_URL)
-
 const {context} = repl.start('> ')
-context.method = method
-context.event = event
-context.methodEx = methodEx
+context.method = connectMethod(NATS_URL || METHOD_NATS_URL)
+context.event = connectEvent(NATS_URL || EVENT_NATS_URL)
+context.methodEx = connectMethodEx(NATS_URL || METHOD_NATS_URL)
+context.eventEx = connectEventEx(NATS_URL || EVENT_NATS_URL)
 
 // extend: auto log
 
 const {AUTO_LOG} = process.env
 
 if (AUTO_LOG) {
+  const {method, methodEx} = context
   {
     let callCount = 0
 
